@@ -10,11 +10,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      env:
-        DOCKER_TAG: $(date +%s)
+    - name: Build the Docker image
+      run: export DOKCER_TAG=$(date +%s)
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag atlassian-sdk:$DOCKER_TAG
     - name: Test the Docker image
       run: docker run atlassian-sdk:$DOCKER_TAG
-    - name: Deploy the Docker image
-      run: echo "TODO"
